@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <link href="resources/css/styles.css" rel="stylesheet" type="text/css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+        <script src="senate.js" defer></script>
+        <title>USA Open Gov</title>
+        <link rel="icon" type="image/png" href="resources/images/vlag_logo.png" />
+    </head>
+    
+    
+    <body>
+        <header> 
+            <!--Banner-->  
+            <div class="col-auto">
+                <img class="row" id="banner" src="resources/images/banner.png">
+            </div>
+            <!--Navigation bar-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-danger">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropwdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link text-white" href="./index.html"><img src="resources/images/vlag_logo.png" width="30" height="30" class="d-inline-block align-top" alt="">Home </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link text-white dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="resources/images/vlag_logo.png" width="30" height="30" class="d-inline-block align-top" alt="">Congress 116<span class="sr-only">(current)</span></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="./116senate.html">Senate</a>
+                            <a class="dropdown-item" href="./116house.html">House</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="resources/images/vlag_logo.png" width="30" height="30" class="d-inline-block align-top" alt="">Attendance</a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                              <a class="dropdown-item" href="./attsenate.html">Senate</a>
+                              <a class="dropdown-item" href="./atthouse.html">House</a>
+                          </div>
+                      </li>
+                      <li class="nav-item dropdown ">
+                        <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="resources/images/vlag_logo.png" width="30" height="30" class="d-inline-block align-top" alt="">Party Loyalty</a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                              <a class="dropdown-item" href="./parloysenate.html">Senate</a>
+                              <a class="dropdown-item" href="./parloyhouse.html">House</a>
+                          </div>
+                      </li>
+                  </ul>
+                </div>
+              </nav>
+        </header>
+        <main>
+            <div class="container">
+                <h3>Senate-Party Loyalty</h3>
+                <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans respectively, tend to be the most faithful in voting for their party's nominee for office and legislation that backs their party's agenda.</p>
+            </div>
+            <div id="senate">
+              <table class="table table-hover" id="table1">
+                <thead><h3>Senate at a Glance</h3> </thead>
+                  
+              
+                <tr>
+                  <th @click="sort('party')">Party</th>
+                  <th @click="sort('state')">Representatives</th>
+                  <th @click="sort('total_votes')">Party Votes</th>
+                </tr>
+                <tbody id="information">
+                    <tr>
+                      <td >Republican</td>
+                      <td>{{ repCount }}</td>
+                      <td>{{ repAvg }}%</td>
+                    </tr>
+                    <tr>
+                      <td >Democrat</td>
+                      <td>{{ demCount }}</td>
+                      <td>{{ demAvg }}%</td>
+                    </tr>
+                    <tr>
+                      <td >Independent</td>
+                      <td>{{ indCount }}</td>
+                      <td>{{ indAvg }}%</td>
+                    </tr>
+                </tbody>
+              
+              </table>
+
+              <table class="table table-hover" id="table1">
+                <thead><h2>Least Loyal</h2></thead>
+                  <tr>
+                    <th @click="sort4('last_name')">Senator</th>
+                    <th @click="sort4('party')">Party</th>
+                    <th @click="sort4('total_votes')">Party Votes</th>
+                    <th @click="sort4('votes_with_party_pct')">Votes with Party Percentage</th>
+                  </tr>
+                  <tbody v-for="member in sortedMembers4" id="information">
+                      <tr>
+                        <td><a class="link" v-bind:href="member.url">{{ member.first_name}} {{member.last_name }}</a></td>
+                        <td v-if="member.party === 'R'">Republican</td>
+                        <td v-else-if="member.party === 'D'">Democrat</td>
+                        <td v-else-if="member.party === 'ID'">Independent</td>
+                        <td>{{ votesWithParty(member) }}</td>
+                        <td>{{ member.votes_with_party_pct }}%</td>
+                
+              </table>
+
+              <table class="table table-hover" id="table1">
+                <thead><h2>Most Loyal</h2></thead>
+                  <tr>
+                    <th @click="sort5('last_name')">Senator</th>
+                    <th @click="sort5('party')">Party</th>
+                    <th @click="sort5('total_votes')">Party Votes</th>
+                    <th @click="sort5('votes_with_party_pct')">Votes with Party Percentage</th>
+                  </tr>
+                  <tbody v-for="member in sortedMembers5" id="information">
+                      <tr>
+                        <td><a class="link" v-bind:href="member.url">{{ member.first_name}} {{member.last_name }}</a></td>
+                        <td v-if="member.party === 'R'">Republican</td>
+                        <td v-else-if="member.party === 'D'">Democrat</td>
+                        <td v-else-if="member.party === 'ID'">Independent</td>
+                        <td>{{ votesWithParty(member) }}</td>
+                        <td>{{ member.votes_with_party_pct }}%</td>
+                
+              </table>
+            
+            </div>
+        </main>
+    </body>
+</html>
+
+
